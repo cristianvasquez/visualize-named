@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Visualization</title>
+    <style>
+        #container {
+            width: 100%;
+            height: 100vh;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="controls">
+    <input value="https://raw.githubusercontent.com/cristianvasquez/visualize-named/refs/heads/main/example.trig"
+           type="text" id="urlInput" placeholder=".trig file URL" style="width: 70%;">
+    <button id="renderButton">Render</button>
+</div>
+<div id="container"></div>
+
+<script type="module" src="./main.js"></script>
+</body>
+</html>

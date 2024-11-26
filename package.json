@@ -1,0 +1,31 @@
+{
+  "name": "visualize-named",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "parcel build index.html --dist-dir dist --public-url /visualize-named/",
+    "dev-parcel": "npx parcel index.html",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
+  "homepage": "https://cristianvasquez.github.io/visualize-named/",
+  "author": "Cristian Vasquez",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@antv/g6": "^5.0.32",
+    "@rdfjs/dataset": "^2.0.2",
+    "@rdfjs/formats": "^4.0.0",
+    "@rdfjs/types": "^1.1.2",
+    "n3": "^1.23.1",
+    "rdf-ext": "^2.5.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "gh-pages": "^6.2.0",
+    "parcel": "^2.13.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.0"
+  }
+}
