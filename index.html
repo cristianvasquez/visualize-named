@@ -3,23 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graph Visualization</title>
+    <title>Trig Visualization</title>
     <style>
         #container {
             width: 100%;
             height: 100vh;
             border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        #message {
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #555;
+        }
+
+        #message a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        #message a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+
 <div id="controls">
-    <input value="https://raw.githubusercontent.com/cristianvasquez/visualize-named/refs/heads/main/example.trig"
-           type="text" id="urlInput" placeholder=".trig file URL" style="width: 70%;">
+    <input type="text" id="urlInput" placeholder=".trig file URL" style="width: 70%;">
     <button id="renderButton">Render</button>
+    <div id="message"></div>
 </div>
 <div id="container"></div>
 
-<script type="module" src="./main.js"></script>
+<script type="module">
+
+  import { createGraph, createModel, fetchTrig } from './index.js'
+
+  const renderGraph = async (url) => {
+    try {
+      const { dataset, prefixes } = await fetchTrig(url)
+      const { nodes, edges } = createModel({ dataset, prefixes })
+      const graph = createGraph({ nodes, edges })
+      document.getElementById('container').innerHTML = ''
+      await graph.render()
+    } catch (error) {
+      messageDiv.innerHTML = error.message
+    }
+
+  }
+
+  const params = new URLSearchParams(window.location.search)
+  const sourceUrl = params.get('url')
+
+  const urlInput = document.getElementById('urlInput')
+  const renderButton = document.getElementById('renderButton')
+  const messageDiv = document.getElementById('message')
+
+  if (sourceUrl) {
+    urlInput.value = sourceUrl
+    renderGraph(sourceUrl)
+  }
+
+  renderButton.addEventListener('click', () => {
+    const url = urlInput.value
+    if (url) {
+      messageDiv.innerHTML = ''
+      renderGraph(url)
+    } else {
+      messageDiv.innerHTML = `
+        Add a valid URL pointing to a Trig file. Try this
+        <a href="?url=https://raw.githubusercontent.com/cristianvasquez/visualize-named/refs/heads/main/example.trig">example</a>
+      `
+    }
+  })
+
+</script>
+
 </body>
 </html>

@@ -7,7 +7,7 @@ function shrink (iri, prefixes) {
   return iri
 }
 
-function toGraph ({ dataset, prefixes }) {
+function createModel ({ dataset, prefixes }) {
   const nodeMap = new Map()
   const nodes = []
   const edges = []
@@ -71,4 +71,4 @@ function toGraph ({ dataset, prefixes }) {
   }
 }
 
-export { toGraph }
+export { createModel }
