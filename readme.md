@@ -22,6 +22,6 @@ ex:bobGraph {
 
 ```
 
-Below is a diagram of the relationships in this TriG file:
+Below is a diagram of the relationships in this TriG file. [online version](https://cristianvasquez.github.io/visualize-named/?url=https://raw.githubusercontent.com/cristianvasquez/visualize-named/refs/heads/main/examples/alice.trig)
 
 ![](./doc/graph.png)

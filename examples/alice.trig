@@ -1,0 +1,10 @@
+@prefix ex: <http://example.org/> .
+
+ex:aliceGraph {
+    ex:Alice ex:name "Alice" ;
+    ex:knows ex:Bob .
+}
+
+ex:bobGraph {
+    ex:Bob ex:name "Bob" .
+}
