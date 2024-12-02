@@ -1,4 +1,9 @@
 function shrink (iri, prefixes) {
+
+  if (iri === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type') {
+    return 'type'
+  }
+
   for (const [prefix, namespace] of Object.entries(prefixes)) {
     if (iri.startsWith(namespace)) {
       return `${prefix}:${iri.slice(namespace.length)}`
@@ -13,7 +18,7 @@ function createModel ({ dataset, prefixes }) {
   const edges = []
   const edgeSet = new Set() // Set to track unique edges
 
-  function getOrCreateNode (id, graphId) {
+  function getOrCreateNode (id, graphId, nodeOpts) {
     if (!nodeMap.has(id)) {
       const node = {
         id,
@@ -24,6 +29,7 @@ function createModel ({ dataset, prefixes }) {
           size: 30,
           labelText: id,
         },
+        ...nodeOpts,
       }
       nodeMap.set(id, node)
       nodes.push(node)
@@ -42,8 +48,11 @@ function createModel ({ dataset, prefixes }) {
     const objectId = shrink(quad.object.value, prefixes)
     const graphId = shrink(quad.graph.value, prefixes) || 'default'
 
-    const subjectNode = getOrCreateNode(subjectId, graphId)
-    const objectNode = getOrCreateNode(objectId, graphId)
+    const subjectNode = getOrCreateNode(subjectId, graphId, {})
+    const objectNode = getOrCreateNode(objectId, graphId,
+      quad.object.termType === 'Literal'
+        ? { type: 'rect' }
+        : {})
 
     if (subjectNode.id !== objectNode.id) {
       const edgeKey = `${subjectNode.id}-${predicateId}-${objectNode.id}`
