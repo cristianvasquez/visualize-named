@@ -49,15 +49,15 @@ function createGraph ({ nodes, edges }) {
       palette: { field: 'cluster' },
     },
     layout: {
-      type: 'force',
-      preventOverlap: true,
-      linkDistance: (d) => {
-        const firstNode = nodes[0]?.id
-        if (d.source === firstNode || d.target === firstNode) {
-          return 200
-        }
-        return 80
+      type: 'd3-force',
+      link: {
+        distance: (d) => {
+          const firstNode = nodes[0]?.id
+          return (d.source === firstNode || d.target === firstNode) ? 200 : 80
+        },
       },
+      collide: { radius: 20, strength: 0.8 },
+      manyBody: { strength: -200 },
     },
     plugins: hullPlugins,
     autoFit: 'center',

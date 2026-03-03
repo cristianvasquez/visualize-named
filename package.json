@@ -14,12 +14,12 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "@antv/g6": "^5.0.32",
+    "@antv/g6": "^5.0.51",
     "@rdfjs/dataset": "^2.0.2",
-    "@rdfjs/formats": "^4.0.0",
+    "@rdfjs/formats": "^4.0.1",
     "@rdfjs/types": "^1.1.2",
-    "n3": "^1.23.1",
-    "rdf-ext": "^2.5.2"
+    "n3": "^1.26.0",
+    "rdf-ext": "^2.6.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.1",
